@@ -1,36 +1,47 @@
 export type Product = {
   id: string
-  ref: string
   name: string
-  category: 'Amizade' | 'Religião'
-  type: 'Caneca' | 'Camisa' | 'Azulejo'
+  description: string
   price: number
+  reference_code: string
+  category: string
   image: string
+  image_url: string
+  is_customizable: boolean
+  type: string
 }
 
 export const products: Product[] = [
   ...Array.from({ length: 20 }).map((_, i) => {
     const num = (i + 1).toString().padStart(2, '0')
+    const isShirt = i % 3 === 0
     return {
       id: `AM${num}`,
-      ref: `AM${num}`,
       name: `Presente Amizade - Modelo ${num}`,
-      category: 'Amizade' as const,
-      type: i % 3 === 0 ? 'Camisa' : ('Caneca' as const),
-      price: i % 3 === 0 ? 59.9 : 35.9,
+      description: `Linda arte de amizade para sublimação em ${isShirt ? 'camisa' : 'caneca'}. Modelo ${num}.`,
+      price: isShirt ? 59.9 : 35.9,
+      reference_code: `AM${num}`,
+      category: 'Amizade',
       image: `https://img.usecurling.com/p/400/400?q=mug&color=pink&seed=${i}`,
+      image_url: `https://img.usecurling.com/p/400/400?q=mug&color=pink&seed=${i}`,
+      is_customizable: true,
+      type: isShirt ? 'Camisa' : 'Caneca',
     }
   }),
-  ...Array.from({ length: 72 }).map((_, i) => {
+  ...Array.from({ length: 10 }).map((_, i) => {
     const num = (i + 1).toString().padStart(2, '0')
+    const isTile = i % 4 === 0
     return {
       id: `RE${num}`,
-      ref: `RE${num}`,
       name: `Artigo Religioso - Modelo ${num}`,
-      category: 'Religião' as const,
-      type: i % 4 === 0 ? 'Azulejo' : ('Caneca' as const),
-      price: i % 4 === 0 ? 25.9 : 35.9,
-      image: `https://img.usecurling.com/p/400/400?q=mug&color=brown&seed=${i + 100}`,
+      description: `Arte religiosa para sublimação em ${isTile ? 'azulejo' : 'caneca'}. Modelo ${num}.`,
+      price: isTile ? 25.9 : 35.9,
+      reference_code: `RE${num}`,
+      category: 'Religião',
+      image: `https://img.usecurling.com/p/400/400?q=dove&color=gray&seed=${i + 100}`,
+      image_url: `https://img.usecurling.com/p/400/400?q=dove&color=gray&seed=${i + 100}`,
+      is_customizable: true,
+      type: isTile ? 'Azulejo' : 'Caneca',
     }
   }),
 ]
